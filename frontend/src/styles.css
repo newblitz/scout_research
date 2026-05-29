@@ -1,0 +1,1178 @@
+/* ============================================================
+   ARXIV LITERATURE SCOUT — Editorial Broadsheet
+   Playfair Display (headings) + Source Sans 3 (body)
+   Palette: parchment #f9f5ef · ink #1a1a2e · rust #b03a2e · warm grey #7a6f65
+   ============================================================ */
+
+:root {
+  --ink:        #1a1a2e;
+  --ink-light:  #3d3650;
+  --rust:       #b03a2e;
+  --rust-light: #e8d5d2;
+  --parchment:  #f9f5ef;
+  --cream:      #f3ede3;
+  --rule:       rgba(26, 26, 46, 0.14);
+  --rule-heavy: rgba(26, 26, 46, 0.55);
+  --warm-grey:  #7a6f65;
+  --success:    #2e6b4f;
+  --success-bg: #e8f3ed;
+  --warning:    #7a4f15;
+  --warning-bg: #fdf3e3;
+  --error:      #8c1a1a;
+  --error-bg:   #fdeaea;
+  --muted:      #9e9289;
+
+  font-family: "Source Sans 3", "Georgia", serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background-color: var(--parchment);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ── Grain texture via body pseudo-element ── */
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.038;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4 {
+  font-family: "Playfair Display", "Georgia", serif;
+  line-height: 1.2;
+  color: var(--ink);
+  font-weight: 700;
+  margin: 0;
+}
+
+h1 { font-size: 2.6rem; letter-spacing: -0.01em; }
+h2 { font-size: 1.55rem; }
+h3 { font-size: 1.15rem; }
+h4 { font-size: 1rem; }
+
+p { margin: 0; }
+
+code, pre {
+  font-family: "Cascadia Code", "Fira Code", "Courier New", monospace;
+  font-size: 0.88em;
+}
+
+a { color: var(--rust); text-decoration: underline; }
+
+/* ── App shell ── */
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+.app-shell {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 52px 24px 80px;
+}
+
+/* ── Horizontal rules ── */
+.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+.rule-heavy {
+  border: none;
+  border-top: 2px solid var(--rule-heavy);
+  margin: 0;
+}
+
+/* ============================================================
+   MASTHEAD
+   ============================================================ */
+.masthead {
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.masthead-kicker {
+  display: inline-block;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--warm-grey);
+  margin-bottom: 18px;
+}
+
+.masthead h1 {
+  font-size: 3.4rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin-bottom: 6px;
+}
+
+.masthead-sub {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  color: var(--warm-grey);
+  font-size: 1.05rem;
+  margin-bottom: 24px;
+}
+
+.masthead-rule-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.masthead-rule-wrap .rule-heavy {
+  flex: 1;
+}
+
+.masthead-rule-ornament {
+  color: var(--rust);
+  font-size: 1.1rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.masthead-stats {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.masthead-stat {
+  padding: 0 28px;
+  text-align: center;
+  border-right: 1px solid var(--rule);
+}
+
+.masthead-stat:first-child { padding-left: 0; }
+.masthead-stat:last-child  { padding-right: 0; border-right: none; }
+
+.stat-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.masthead-stat strong {
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  word-break: break-all;
+}
+
+/* ============================================================
+   SESSION RIBBON (replaces meta-card)
+   ============================================================ */
+.session-ribbon {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 0 16px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 52px;
+  font-size: 0.82rem;
+  color: var(--warm-grey);
+  flex-wrap: wrap;
+}
+
+.session-ribbon code {
+  color: var(--ink-light);
+  background: var(--cream);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.session-ribbon-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.session-ribbon-sep {
+  color: var(--rule-heavy);
+  user-select: none;
+}
+
+/* ============================================================
+   PHASE SECTIONS — vertical single-column stack
+   ============================================================ */
+.phase-stack {
+  display: grid;
+  gap: 72px;
+}
+
+.phase-section {
+  animation: fadeInUp 0.4s ease both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Phase section header */
+.phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 6px;
+}
+
+.phase-numeral {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--rust);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 2.2rem;
+  text-align: right;
+}
+
+.phase-title-group {
+  border-left: 2px solid var(--rust);
+  padding-left: 16px;
+  flex: 1;
+}
+
+.phase-title-group h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.phase-desc {
+  font-style: italic;
+  color: var(--warm-grey);
+  font-size: 0.92rem;
+  margin-top: 2px;
+}
+
+.phase-rule {
+  margin: 14px 0 28px;
+}
+
+/* ============================================================
+   PANEL STACK — inner sections within a phase
+   ============================================================ */
+.panel-stack {
+  display: grid;
+  gap: 32px;
+}
+
+.action-panel {
+  border-top: 1px solid var(--rule);
+  padding-top: 24px;
+}
+
+.interrupt-panel {
+  border: none;
+  border-left: 3px solid var(--warning);
+  padding: 14px 18px;
+  background: var(--warning-bg);
+}
+
+.interrupt-panel h3 {
+  color: var(--warning);
+  margin-bottom: 6px;
+}
+
+/* Panel header row */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.panel-header h3 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
+.field-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warm-grey);
+  margin-bottom: 7px;
+  margin-top: 14px;
+}
+
+.field-label:first-child {
+  margin-top: 0;
+}
+
+.text-input {
+  width: 100%;
+  border: 1px solid var(--rule-heavy);
+  border-radius: 0;
+  padding: 10px 12px;
+  resize: vertical;
+  background: #fff;
+  color: var(--ink);
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.95rem;
+  transition: border-color 0.15s;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: var(--rust);
+  box-shadow: 3px 3px 0 var(--rust-light);
+}
+
+/* ============================================================
+   BUTTONS — rectangular, small-caps
+   ============================================================ */
+.primary-button {
+  display: inline-block;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  padding: 9px 20px;
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.primary-button:hover:not(:disabled) {
+  background: var(--rust);
+  border-color: var(--rust);
+}
+
+.primary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+
+.secondary-button {
+  display: inline-block;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  padding: 9px 20px;
+  background: transparent;
+  color: var(--ink);
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--parchment);
+}
+
+.secondary-button:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+/* Action row (button + helper text) */
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   STATUS CHIPS
+   ============================================================ */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+
+.status-idle,
+.status-completed {
+  color: var(--success);
+  border-color: rgba(46, 107, 79, 0.4);
+  background: var(--success-bg);
+}
+
+.status-running {
+  color: var(--ink-light);
+  border-color: var(--rule-heavy);
+  background: var(--cream);
+}
+
+.status-waiting_for_input {
+  color: var(--warning);
+  border-color: rgba(122, 79, 21, 0.4);
+  background: var(--warning-bg);
+}
+
+.status-error {
+  color: var(--error);
+  border-color: rgba(140, 26, 26, 0.4);
+  background: var(--error-bg);
+}
+
+/* Phase pill (small inline badge) */
+.snapshot-pill {
+  display: inline-flex;
+  padding: 3px 9px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rust);
+  border: 1px solid rgba(176, 58, 46, 0.35);
+  background: var(--rust-light);
+  margin-bottom: 8px;
+}
+
+/* ============================================================
+   HELPER TEXT
+   ============================================================ */
+.helper-copy,
+.inline-note,
+.phase-copy {
+  font-size: 0.88rem;
+  color: var(--warm-grey);
+  font-style: italic;
+}
+
+.inline-note {
+  margin: 8px 0;
+  color: var(--ink-light);
+  font-style: normal;
+}
+
+/* ============================================================
+   ANGLE CARDS — search angle tags
+   ============================================================ */
+.angle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.angle-card {
+  padding: 10px 14px;
+  border-left: 3px solid var(--rust);
+  background: var(--cream);
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   PAPER GRID — shortlist as bibliography entries
+   ============================================================ */
+.paper-grid {
+  display: grid;
+  gap: 0;
+  margin-bottom: 16px;
+}
+
+.paper-card {
+  display: block;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.paper-card:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.paper-card-selected {
+  background: var(--cream);
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-left: -12px;
+  margin-right: -12px;
+  border-left: 3px solid var(--rust);
+}
+
+.paper-card-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.paper-card input[type="checkbox"] {
+  margin-top: 4px;
+  flex-shrink: 0;
+  accent-color: var(--rust);
+  width: 15px;
+  height: 15px;
+}
+
+.paper-card h4 {
+  font-family: "Playfair Display", serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+
+.paper-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.paper-rationale,
+.paper-abstract {
+  margin-top: 5px;
+  font-size: 0.85rem;
+  color: var(--warm-grey);
+  line-height: 1.5;
+}
+
+.paper-rationale {
+  font-style: italic;
+  color: var(--ink-light);
+}
+
+/* ============================================================
+   APPROVED PAPERS LIST
+   ============================================================ */
+.approved-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.approved-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.92rem;
+}
+
+.approved-list li:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.approved-list li strong {
+  font-weight: 600;
+  color: var(--ink);
+  flex: 1;
+}
+
+.approved-list li span {
+  font-size: 0.75rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  font-style: italic;
+}
+
+/* ============================================================
+   STEERING MEMORY TOKENS
+   ============================================================ */
+.token-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 14px;
+  min-height: 28px;
+}
+
+.token {
+  display: inline-flex;
+  padding: 3px 10px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.include-token {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid rgba(46, 107, 79, 0.35);
+}
+
+.exclude-token {
+  background: var(--error-bg);
+  color: var(--error);
+  border: 1px solid rgba(140, 26, 26, 0.35);
+}
+
+.emphasize-token {
+  background: var(--cream);
+  color: var(--ink-light);
+  border: 1px solid var(--rule-heavy);
+}
+
+/* ============================================================
+   TABLES — Economist-style
+   ============================================================ */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.data-table thead tr {
+  border-top: 2px solid var(--rule-heavy);
+  border-bottom: 1px solid var(--rule-heavy);
+}
+
+.data-table th {
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warm-grey);
+}
+
+.data-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  color: var(--ink-light);
+}
+
+.data-table tbody tr:nth-child(even) td {
+  background: rgba(243, 237, 227, 0.45);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: 2px solid var(--rule-heavy);
+}
+
+/* ============================================================
+   SUMMARY TILES (stat grid)
+   ============================================================ */
+.analysis-summary-grid,
+.survey-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0;
+  border: 1px solid var(--rule-heavy);
+}
+
+.summary-tile {
+  padding: 14px 16px;
+  border-right: 1px solid var(--rule);
+  text-align: center;
+}
+
+.summary-tile:last-child {
+  border-right: none;
+}
+
+.summary-tile .stat-label {
+  margin-bottom: 4px;
+}
+
+.summary-tile strong {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  display: block;
+  line-height: 1;
+}
+
+/* ============================================================
+   SELECTION GRID (analysis paper selection)
+   ============================================================ */
+.selection-grid {
+  display: grid;
+  gap: 0;
+  margin-bottom: 16px;
+}
+
+.selection-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.selection-card:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.selection-card input[type="checkbox"] {
+  margin-top: 3px;
+  flex-shrink: 0;
+  accent-color: var(--rust);
+}
+
+.selection-card strong {
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+  font-size: 0.93rem;
+  line-height: 1.3;
+}
+
+.selection-card .paper-meta {
+  display: block;
+  margin-top: 2px;
+}
+
+.selection-card-selected {
+  background: var(--cream);
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-left: -12px;
+  margin-right: -12px;
+  border-left: 3px solid var(--ink);
+}
+
+/* ============================================================
+   ANALYSIS PAPER CARDS — full summaries
+   ============================================================ */
+.analysis-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.analysis-paper-card {
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+}
+
+.analysis-paper-card h4 {
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.analysis-claim {
+  margin: 8px 0 10px;
+  color: var(--ink-light);
+  font-size: 0.93rem;
+  font-style: italic;
+}
+
+.compact-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.85rem;
+  color: var(--warm-grey);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   QUALITY BADGES
+   ============================================================ */
+.quality-badge {
+  display: inline-flex;
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.quality-badge-full {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid rgba(46, 107, 79, 0.35);
+}
+
+.quality-badge-degraded {
+  background: var(--warning-bg);
+  color: var(--warning);
+  border: 1px solid rgba(122, 79, 21, 0.4);
+}
+
+/* ============================================================
+   CITATION GRAPH
+   ============================================================ */
+.graph-wrap {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(200px, 1fr);
+  margin-top: 14px;
+}
+
+.graph-canvas {
+  width: 100%;
+  min-height: 260px;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+}
+
+.graph-edge {
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.graph-edge-direct {
+  stroke: var(--ink);
+}
+
+.graph-edge-inferred {
+  stroke: var(--warm-grey);
+  stroke-dasharray: 6 5;
+}
+
+.graph-node-seed {
+  fill: rgba(26, 26, 46, 0.1);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.graph-node-context {
+  fill: rgba(176, 58, 46, 0.1);
+  stroke: var(--rust);
+  stroke-width: 1.5;
+}
+
+.graph-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  fill: var(--ink);
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.graph-legend {
+  font-size: 0.84rem;
+}
+
+.graph-legend h4,
+.lineage-list h4 {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+
+.graph-legend h4:first-child,
+.lineage-list h4:first-child {
+  margin-top: 0;
+}
+
+.edge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.edge-card {
+  padding: 10px 12px;
+  background: var(--cream);
+  border-left: 2px solid var(--rule-heavy);
+  display: grid;
+  gap: 2px;
+  font-size: 0.8rem;
+}
+
+.edge-card strong {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.lineage-list {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--cream);
+  border-top: 2px solid var(--rule-heavy);
+}
+
+/* ============================================================
+   BRIEF GRID (survey inputs)
+   ============================================================ */
+.brief-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* ============================================================
+   CLUSTER CARDS
+   ============================================================ */
+.cluster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.cluster-card {
+  padding: 14px 16px;
+  border-top: 2px solid var(--ink);
+  background: var(--cream);
+}
+
+.cluster-card h4 {
+  font-size: 0.93rem;
+  margin-bottom: 6px;
+}
+
+.cluster-card p {
+  font-size: 0.85rem;
+  color: var(--warm-grey);
+  margin-bottom: 6px;
+}
+
+/* ============================================================
+   SURVEY SECTIONS
+   ============================================================ */
+.survey-section-list {
+  display: grid;
+  gap: 24px;
+}
+
+.survey-section-card {
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+}
+
+.survey-section-card h4 {
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  margin-bottom: 3px;
+}
+
+/* ============================================================
+   MARKDOWN PREVIEWS
+   ============================================================ */
+.markdown-preview {
+  white-space: pre-wrap;
+  background: var(--ink);
+  color: #d8cfc4;
+  border: none;
+  margin-top: 12px;
+  padding: 16px 18px;
+  border-radius: 0;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.markdown-preview-section {
+  max-height: 260px;
+  overflow: auto;
+}
+
+pre {
+  overflow: auto;
+  background: var(--ink);
+  color: #d8cfc4;
+  padding: 16px 18px;
+  border-radius: 0;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   STREAM EVENTS — timeline layout
+   ============================================================ */
+.stream-section {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 2px solid var(--rule-heavy);
+}
+
+.stream-section-header {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.event-list {
+  display: grid;
+  gap: 0;
+}
+
+.event-card {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+  animation: fadeInUp 0.25s ease both;
+}
+
+.event-card:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: 2px;
+}
+
+.event-meta strong {
+  display: none;
+}
+
+.event-meta span {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.event-card p {
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.event-card strong.event-type-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+/* ============================================================
+   ERROR BANNER
+   ============================================================ */
+.error-banner {
+  margin: 0;
+  padding: 12px 14px;
+  background: var(--error-bg);
+  color: var(--error);
+  border-left: 3px solid var(--error);
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 680px) {
+  :root { font-size: 16px; }
+
+  .app-shell {
+    padding: 32px 18px 56px;
+  }
+
+  .masthead h1 {
+    font-size: 2.4rem;
+  }
+
+  .masthead-stats {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+
+  .masthead-stat {
+    border-right: none;
+    padding: 0;
+    text-align: left;
+  }
+
+  .phase-numeral {
+    font-size: 1.6rem;
+  }
+
+  .brief-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .graph-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .cluster-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .analysis-summary-grid,
+  .survey-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .summary-tile:nth-child(2) {
+    border-right: none;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .action-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
